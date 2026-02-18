@@ -85,22 +85,21 @@
 				}
 
 				var captcha = grecaptcha.getResponse();
-				console.log(captcha.length);
-				return;
+				// console.log(captcha.length);
+				// return;
 				if (captcha.length==0) {
 					alert("Необходима каптча");
-				// 	let Data = new FormData();
-				// 	Data.append('g-recaptcha-response', captcha);
-				// 	Ajax("url", Data, SignIn);
+					return
 				 }
 				
+
 				loading.style.display = "block";
 				button.className = "button_diactive";
 				
 				var data = new FormData();
 				data.append("login", _login);
 				data.append("password", _password);
-				
+				data.append("g-recaptcha-response", captcha);
 				// AJAX запрос
 				$.ajax({
 					url         : 'ajax/regin_user.php',
